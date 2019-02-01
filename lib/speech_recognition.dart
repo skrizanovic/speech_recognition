@@ -86,5 +86,5 @@ class SpeechRecognition {
       currentLocaleHandler = handler;
   
   void setonErrorHandler(ErrorHandler handler) =>
-      onErrorHandler = handler;
+      errorHandler = handler;
 }
