@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 typedef void AvailabilityHandler(bool result);
 typedef void StringResultHandler(String text);
+typedef void ErrorHandler(dynamic message);
 
 /// the channel to control the speech recognition
 class SpeechRecognition {
@@ -20,10 +21,10 @@ class SpeechRecognition {
   }
 
   AvailabilityHandler availabilityHandler;
-
   StringResultHandler currentLocaleHandler;
   StringResultHandler recognitionResultHandler;
 
+  ErrorHandler errorHandler;
   VoidCallback recognitionStartedHandler;
 
   VoidCallback recognitionCompleteHandler;
@@ -57,6 +58,9 @@ class SpeechRecognition {
       case "speech.onRecognitionComplete":
         recognitionCompleteHandler();
         break;
+      case "speech.onError":
+        errorHandler(call.arguments);
+        break;
       default:
         print('Unknowm method ${call.method} ');
     }
@@ -80,4 +84,7 @@ class SpeechRecognition {
 
   void setCurrentLocaleHandler(StringResultHandler handler) =>
       currentLocaleHandler = handler;
+  
+  void setonErrorHandler(ErrorHandler handler) =>
+      onErrorHandler = handler;
 }
