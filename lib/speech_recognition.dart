@@ -59,7 +59,7 @@ class SpeechRecognition {
         recognitionCompleteHandler();
         break;
       case "speech.onError":
-        errorHandler(call.arguments);
+        errorHandler(call);
         break;
       default:
         print('Unknowm method ${call.method} ');
